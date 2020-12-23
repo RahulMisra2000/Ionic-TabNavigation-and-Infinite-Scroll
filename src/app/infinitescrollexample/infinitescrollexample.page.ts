@@ -24,13 +24,17 @@ export class InfinitescrollexamplePage implements OnInit, AfterViewInit {
   }
 
   async doInfinite(e){
+    this.users = this.pService.getUsers(this.length,10);
+    console.log(this.length, this.users.length);
+
     if (this.users.length > 0) {
       console.log('Loading data...');
       await this.wait(500);
       this.trvInfiniteScroll.complete();
-      this.users = this.pService.getUsers(length,10);
+      
       this.appendItems(this.users.length);
       this.length += this.users.length;
+
       console.log('Done');
     } else {
       console.log('No More Data');
@@ -67,7 +71,8 @@ export class InfinitescrollexamplePage implements OnInit, AfterViewInit {
 
       await this.wait(200);
 
-      document.querySelector('#mylist').appendChild(el);       
+      document.querySelector('#mylist').appendChild(el);   
+      //this.trvList.nativeElement.appendChild(el);    
     }
   }
 

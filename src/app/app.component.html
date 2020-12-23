@@ -1,3 +1,42 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+
+   <!-- This is menu -->
+  <ion-menu side="start" menuId="menu1">
+    <ion-header>
+      <ion-toolbar translucent>
+        <ion-title>Menu 1</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+        <ion-item color="secondary" detail="true"> 
+          <ion-icon name="heart" slot="start"></ion-icon>
+          <ion-label>Favorites</ion-label>
+        </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+        <ion-item detail id="alpha">
+          <ion-icon name="archive" slot="start"></ion-icon>
+          <ion-label>Archived</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+        <ion-menu-toggle>
+        <ion-item>
+          <ion-icon name="trash" slot="start"></ion-icon>
+          <ion-label>Trash</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+        <ion-menu-toggle>
+        <ion-item>
+          <ion-icon name="warning" slot="start"></ion-icon>
+          <ion-label>Spam</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet main></ion-router-outlet>
+
 </ion-app>

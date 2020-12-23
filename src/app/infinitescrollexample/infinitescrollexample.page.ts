@@ -12,12 +12,16 @@ export class InfinitescrollexamplePage implements OnInit, AfterViewInit {
     
     users = [];
 
-    @ViewChild('trvList') trvList: ElementRef;
-    @ViewChild('trvInfiniteScroll') trvInfiniteScroll: ElementRef;
+    @ViewChild('trvList', {read: ElementRef}) trvList: ElementRef;
+    @ViewChild('trvInfiniteScroll', {read: ElementRef}) trvInfiniteScroll: ElementRef;
 
   constructor(private pService: PlacesService) { }
   
   ngAfterViewInit(): void {
+
+    console.log("****", this.trvList.nativeElement);
+    console.log("****", this.trvInfiniteScroll.nativeElement);
+
     this.users = this.pService.getUsers(0,20);
     this.appendItems(this.users.length);
     this.length += this.users.length;
@@ -25,12 +29,12 @@ export class InfinitescrollexamplePage implements OnInit, AfterViewInit {
 
   async doInfinite(e){
     this.users = this.pService.getUsers(this.length,10);
-    console.log(this.length, this.users.length);
+    console.log('DoInfinite CALLED:', this.length, this.users.length);
 
     if (this.users.length > 0) {
       console.log('Loading data...');
       await this.wait(500);
-      this.trvInfiniteScroll.complete();
+      this.trvInfiniteScroll.nativeElement.complete();
       
       this.appendItems(this.users.length);
       this.length += this.users.length;
@@ -38,7 +42,7 @@ export class InfinitescrollexamplePage implements OnInit, AfterViewInit {
       console.log('Done');
     } else {
       console.log('No More Data');
-      this.trvInfiniteScroll.disabled = true;
+      this.trvInfiniteScroll.nativeElement.disabled = true;
     }
   }
 
@@ -52,7 +56,7 @@ export class InfinitescrollexamplePage implements OnInit, AfterViewInit {
 
     for (var i = 0; i < n; i++) {
       console.log(i);
-      console.log(this.users);
+      console.log('array', this.users);
       console.log(this.users[1].name);
       console.log("here");
       console.log(this.users[i].name);
@@ -69,7 +73,7 @@ export class InfinitescrollexamplePage implements OnInit, AfterViewInit {
         </ion-label>
       `;
 
-      await this.wait(200);
+      //await this.wait(200);
 
       document.querySelector('#mylist').appendChild(el);   
       //this.trvList.nativeElement.appendChild(el);    

@@ -151,9 +151,7 @@ export class PlacesService {
 
   getUsers(start:number, howMany: number): any[]{
 
-    console.log(start, howMany);
-    console.log(this._users);
-
+   
     return [...this._users.slice(start,start+howMany)];
 
   }
